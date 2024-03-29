@@ -103,6 +103,7 @@ if ( ! function_exists( 'storefront_footer_widgets' ) ) {
 				}
 			}
 
+            /*
 			if ( isset( $columns ) ) :
 				?>
 				<div class=<?php echo '"footer-widgets row-' . esc_attr( $row ) . ' col-' . esc_attr( $columns ) . ' fix"'; ?>>
@@ -123,6 +124,8 @@ if ( ! function_exists( 'storefront_footer_widgets' ) ) {
 				<?php
 				unset( $columns );
 			endif;
+            */
+
 		endfor;
 	}
 }
@@ -138,17 +141,17 @@ if ( ! function_exists( 'storefront_credit' ) ) {
 		$links_output = '';
 
 		if ( apply_filters( 'storefront_credit_link', true ) ) {
-			if ( storefront_is_woocommerce_activated() ) {
-				$links_output .= '<a href="https://woo.com" target="_blank" title="' . esc_attr__( 'WooCommerce - The Best eCommerce Platform for WordPress', 'storefront' ) . '" rel="noreferrer nofollow">' . esc_html__( 'Built with WooCommerce', 'storefront' ) . '</a>.';
-			} else {
-				$links_output .= '<a href="https://woo.com/products/storefront/" target="_blank" title="' . esc_attr__( 'Storefront -  The perfect platform for your next WooCommerce project.', 'storefront' ) . '" rel="noreferrer nofollow">' . esc_html__( 'Built with Storefront', 'storefront' ) . '</a>.';
-			}
+			// if ( storefront_is_woocommerce_activated() ) {
+			// 	$links_output .= '<a href="https://woo.com" target="_blank" title="' . esc_attr__( 'WooCommerce - The Best eCommerce Platform for WordPress', 'storefront' ) . '" rel="noreferrer nofollow">' . esc_html__( 'Built with WooCommerce', 'storefront' ) . '</a>.';
+			// } else {
+				$links_output .= '<a href="/who-we-are">' . esc_html__( 'About Us', 'storefront' ) . '</a><span role="separator" aria-hidden="true"></span><a href="/events">' . esc_html__( 'Find an Event', 'storefront' ) . '</a>';
+			// }
 		}
 
-		if ( apply_filters( 'storefront_privacy_policy_link', true ) && function_exists( 'the_privacy_policy_link' ) ) {
-			$separator    = '<span role="separator" aria-hidden="true"></span>';
-			$links_output = get_the_privacy_policy_link( '', ( ! empty( $links_output ) ? $separator : '' ) ) . $links_output;
-		}
+		// if ( apply_filters( 'storefront_privacy_policy_link', true ) && function_exists( 'the_privacy_policy_link' ) ) {
+		// 	$separator    = '<span role="separator" aria-hidden="true"></span>';
+		// 	$links_output = get_the_privacy_policy_link( '', ( ! empty( $links_output ) ? $separator : '' ) ) . $links_output;
+		// }
 
 		$links_output = apply_filters( 'storefront_credit_links_output', $links_output );
 		?>
@@ -192,9 +195,9 @@ if ( ! function_exists( 'storefront_site_branding' ) ) {
 	 */
 	function storefront_site_branding() {
 		?>
-		<div class="site-branding">
-			<?php storefront_site_title_or_logo(); ?>
-		</div>
+		<!--<div class="site-branding">
+			<?php // storefront_site_title_or_logo(); ?>
+		</div>-->
 		<?php
 	}
 }
@@ -239,6 +242,9 @@ if ( ! function_exists( 'storefront_primary_navigation' ) ) {
 	function storefront_primary_navigation() {
 		?>
 		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Primary Navigation', 'storefront' ); ?>">
+		<div class="site-branding">
+			<?php storefront_site_title_or_logo(); ?>
+		</div>
 		<button id="site-navigation-menu-toggle" class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_html( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'storefront' ) ) ); ?></span></button>
 			<?php
 			wp_nav_menu(
@@ -250,7 +256,7 @@ if ( ! function_exists( 'storefront_primary_navigation' ) ) {
 
 			wp_nav_menu(
 				array(
-					'theme_location'  => 'handheld',
+					'theme_location'  => 'primary',
 					'container_class' => 'handheld-navigation',
 				)
 			);

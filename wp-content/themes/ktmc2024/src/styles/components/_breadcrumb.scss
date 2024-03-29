@@ -1,0 +1,21 @@
+/* ==========================================================================
+    Breadcrumbs
+========================================================================== */
+
+.storefront-breadcrumb {
+    padding: 0 !important;
+
+    @include media(">=screen768") {
+        .col-full {
+            max-width: 100%;
+        }
+    }
+
+    .woocommerce-breadcrumb {
+        line-height: $base-line-height;
+
+        a {
+            @include inline-block();
+        }
+    }
+}

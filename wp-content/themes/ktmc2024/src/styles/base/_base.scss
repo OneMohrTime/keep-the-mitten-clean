@@ -1,0 +1,44 @@
+/* ==========================================================================
+    Base
+========================================================================== */
+
+html {
+    height: 100%;
+    font-size: 1em;
+    line-height: 1em;
+    background-color: $black;
+
+    // If Javascript is turned off...
+    // &.no-js {}
+}
+
+body {
+    position: relative;
+    width: 100%;
+    // height: 100%;
+    height: auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: $font-main !important;
+    font-size: 1em;
+    background-attachment: fixed;
+    background-color: $white--darker;
+    background-image: url("/wp-content/themes/onemohrtime/assets/img/concrete-light.png");
+    background-position: top center;
+    color: $black;
+
+    // crisp typography rendering
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/**
+ * === SITE ===
+ */
+
+.site {
+    background-color: $white;
+    color: $black;
+}

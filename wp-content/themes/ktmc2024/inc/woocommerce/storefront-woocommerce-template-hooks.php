@@ -64,7 +64,7 @@ add_action( 'storefront_footer', 'storefront_handheld_footer_bar', 999 );
  * @see storefront_single_product_pagination()
  * @see storefront_sticky_single_add_to_cart()
  */
-add_action( 'woocommerce_single_product_summary', 'storefront_edit_post_link', 60 );
+// add_action( 'woocommerce_single_product_summary', 'storefront_edit_post_link', 60 );
 
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 add_action( 'woocommerce_after_single_product_summary', 'storefront_upsell_display', 15 );
@@ -81,7 +81,7 @@ add_action( 'storefront_after_footer', 'storefront_sticky_single_add_to_cart', 9
  * @see storefront_product_search()
  * @see storefront_header_cart()
  */
-add_action( 'storefront_header', 'storefront_product_search', 40 );
+// add_action( 'storefront_header', 'storefront_product_search', 40 ); don't add product search quite yet
 add_action( 'storefront_header', 'storefront_header_cart', 60 );
 
 /**

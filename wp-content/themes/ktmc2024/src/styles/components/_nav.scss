@@ -1,0 +1,118 @@
+/* ==========================================================================
+    Navigation
+========================================================================== */
+
+/**
+* === MENU ===
+*/
+
+.storefront-primary-navigation {
+
+    @include media(">=screen768") {
+        .col-full {
+            display: flex;
+            align-items: flex-end;
+            max-width: 100%;
+        }
+        .site-header-cart.menu {
+            .cart-contents {
+                color: $white;
+                &::after {
+                    line-height: 1;
+                }
+            }
+        }
+    }
+}
+
+.main-navigation {
+
+    @include media(">=screen768") {
+        display: flex;
+        align-items: center;
+    }
+
+    &.toggled {
+        .handheld-navigation .menu {
+            margin-top: 24px;
+        }
+        .menu-toggle {
+            border-color: $yellow;
+            background-color: $blue;
+            color: $yellow;
+            &::before,
+            &::after,
+            span::before {
+                background-color: $yellow;
+            }
+            @include hocus {
+                border-color: $yellow;
+                background-color: $blue;
+                color: $yellow;
+            }
+        }
+    }
+
+    .menu {
+        a {
+            color: $white;
+        }
+        .current_page_item {
+            a {
+                color: $yellow !important;
+            }
+        }
+        @include media(">=screen768") {
+            a {
+                padding: 1em !important;
+            }
+        }
+    }
+
+    .menu-toggle {
+        border-color: $white;
+        background-color: $blue;
+        color: $white;
+
+        &::before,
+        &::after,
+        span::before {
+            background-color: $white;
+        }
+    }
+
+    .primary-navigation {
+        // ONLY displays above 768px
+        .menu.nav-menu {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        .menu-item {
+            a {
+                font-weight: 750;
+                font-variation-settings: "wdth" 90;
+                @include hocus {
+                    color: $yellow;
+                }
+            }
+        }
+        .menu-item.menu-item-has-children {
+            a {
+                display: flex;
+            }
+        }
+    }
+
+    .sub-menu {
+        @include media(">=screen768") {
+            @include box-shadow();
+            border-radius: $base-border-radius;
+            background-color: $blue !important;
+        }
+    }
+
+    @include media(">=screen768") {
+        flex: 1 0 auto;
+    }
+}

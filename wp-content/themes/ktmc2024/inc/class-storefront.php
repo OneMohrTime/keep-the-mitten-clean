@@ -32,6 +32,7 @@ if ( ! class_exists( 'Storefront' ) ) :
 			add_filter( 'wp_page_menu_args', array( $this, 'page_menu_args' ) );
 			add_filter( 'navigation_markup_template', array( $this, 'navigation_markup_template' ) );
 			add_action( 'enqueue_embed_scripts', array( $this, 'print_embed_styles' ) );
+            add_filter( 'wpseo_metabox_prio', array( $this, 'yoasttobottom' ) );
 		}
 
 		/**
@@ -341,6 +342,9 @@ if ( ! class_exists( 'Storefront' ) ) :
 			wp_enqueue_style( 'storefront-style', get_template_directory_uri() . '/style.css', '', $storefront_version );
 			wp_style_add_data( 'storefront-style', 'rtl', 'replace' );
 
+			wp_enqueue_style( 'main', get_template_directory_uri() . '/assets/css/app.css', '', $storefront_version );
+			wp_style_add_data( 'main', 'rtl', 'replace' );
+
 			wp_enqueue_style( 'storefront-icons', get_template_directory_uri() . '/assets/css/base/icons.css', '', $storefront_version );
 			wp_style_add_data( 'storefront-icons', 'rtl', 'replace' );
 
@@ -374,6 +378,8 @@ if ( ! class_exists( 'Storefront' ) ) :
 			if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 				wp_enqueue_script( 'comment-reply' );
 			}
+
+            wp_enqueue_script('main', get_template_directory_uri() . '/assets/js/app.js', array(), $storefront_version, true);
 		}
 
 		/**
@@ -550,6 +556,13 @@ if ( ! class_exists( 'Storefront' ) ) :
 			</style>
 			<?php
 		}
+
+        /**
+         * Move Yoast to bottom
+         */
+        public function yoasttobottom() {
+            return 'low';
+        }
 	}
 endif;
 
