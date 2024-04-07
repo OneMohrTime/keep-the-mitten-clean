@@ -1,0 +1,65 @@
+{
+  "name": "ktmc2024",
+  "description": "Wordpress theme for Keep the Mitten Clean",
+  "version": "1.0.0",
+  "author": {
+    "name": "Derek Mohr",
+    "email": "derek@onemohrti.me",
+    "url": "https://onemohrti.me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OneMohrTime/keep-the-mitten-clean.git"
+  },
+  "license": "MIT",
+  "main": "index.php",
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "build": "npm run production",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "browserslist": [
+    "last 5 versions",
+    "> 1%",
+    "IE 10-11"
+  ],
+  "dependencies": {
+    "@fancyapps/ui": "^5.0.23",
+    "bourbon": "^7.3.0",
+    "css-reset-and-normalize": "^2.3.6",
+    "include-media": "^1.4.10",
+    "modujs": "^1.4.2",
+    "modularload": "^1.2.8",
+    "modularscroll": "^1.0.7",
+    "prismjs": "^1.29.0",
+    "swiper": "^10.3.1",
+    "tippy.js": "^6.3.7"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "browser-sync-webpack-plugin": "^2.3.0",
+    "browserify-zlib": "^0.2.0",
+    "constants-browserify": "^1.0.0",
+    "crypto-browserify": "^3.12.0",
+    "https-browserify": "^1.0.0",
+    "laravel-mix": "^6.0.43",
+    "laravel-mix-imagemin": "^1.0.3",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "querystring-es3": "^0.2.1",
+    "request": "^2.88.2",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "timers-browserify": "^2.0.12",
+    "vm-browserify": "^1.1.2",
+    "webpack-cli": "^5.1.4"
+  }
+}
