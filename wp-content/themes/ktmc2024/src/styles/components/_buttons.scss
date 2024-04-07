@@ -27,17 +27,22 @@
 }
 
 /**
+ * === Link Class ===
+ */
+
+.hentry .entry-content a:not([class]) {
+    @include inline-block();
+    font-weight: 550;
+}
+
+/**
  * === Button Class ===
  */
 
+.wp-block-buttons .wp-block-button .wp-block-button__link.wp-element-button,
 .wp-block-button__link,
 .wp-element-button,
 .tribe-block > a,
 .button {
     @include btn-style();
-
-    .c-media__svg {
-        position: relative;
-        transition: $speed cubic-bezier(.455,.03,.515,.955);
-    }
 }
