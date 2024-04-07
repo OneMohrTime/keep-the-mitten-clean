@@ -50,11 +50,85 @@
         color: $blue;
     }
 
+    .tribe-events-schedule {
+        margin: 1rem 0;
+    }
+
+    .tribe-events-schedule__datetime {
+        font-family: $font-main;
+        line-height: 1;
+        .tribe-events-schedule__date--start {
+            font-size: 2.5rem;
+        }
+        .tribe-events-schedule__time,
+        .tribe-events-schedule__separator {
+            font-size: 2rem;
+        }
+    }
+
+    .tribe-events-schedule__date {
+        font-weight: 600;
+    }
+
     .tribe-events-schedule__all-day,
     .tribe-events-schedule__separator,
     .tribe-events-schedule__timezone,
     .tribe-block__event-price__cost {
         color: $green;
+    }
+
+    .tribe-block.tribe-block__event-price {
+        padding: 2em 0;
+    }
+
+    .tribe-events-single.tribe-blocks-editor {
+        padding: 0;
+        .tribe-events-back {
+            margin: 0 0 1em;
+            line-height: 1.2em;
+            a {
+                @include inline-block();
+                display: inline-block;
+                padding-bottom: 5px;
+            }
+        }
+        .tribe_events.type-tribe_events {
+            p, li {
+                line-height: 1.5em;
+                a {
+                    @include inline-block();
+                    font-weight: 550;
+                }
+            }
+            ul, ol {
+                margin: 0 0 0.75em;
+                padding-left: 1.5em;
+            }
+        }
+    }
+
+    .tribe-block.tribe-block__organizer__details {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .tribe-block.tribe-block__venue {
+        width: 100%;
+        max-width: 100%;
+        .tribe-block__venue__meta {
+            a {
+                @include inline-block();
+                display: inline-block;
+                padding-bottom: 3px;
+            }
+        }
+        .tribe-block__venue__name {
+            h3 {
+                margin-bottom: 0.75em;
+                font-size: var(--tec-font-size-8);
+                line-height: 1.2em;
+            }
+        }
     }
 
     @include media(">=screen1280") {
@@ -64,7 +138,13 @@
             border: none;
         }
         .tribe-block__organizer__title h3 {
+            font-size: 1.5em;
             font-weight: 600;
+        }
+        .tribe-block__organizer__website {
+            a {
+                padding-bottom: 5px;
+            }
         }
         .tribe-block__events-link {
             width: 100%;

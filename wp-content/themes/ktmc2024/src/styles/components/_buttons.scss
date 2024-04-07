@@ -32,6 +32,7 @@
 
 .wp-block-button__link,
 .wp-element-button,
+.tribe-block > a,
 .button {
     @include btn-style();
 
