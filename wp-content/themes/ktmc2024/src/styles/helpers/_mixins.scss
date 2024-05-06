@@ -1,0 +1,463 @@
+/* ==========================================================================
+    Mixins
+========================================================================== */
+
+/**
+* === STRUCTURE ===
+*/
+
+@mixin block-width() {
+    margin-top: 0;
+    margin-left: $gutter;
+    margin-right: $gutter;
+    margin-bottom: $gutter-lg;
+
+    @include media(">=screen768") {
+        margin-left: $gutter-lg;
+        margin-right: $gutter-lg;
+    }
+
+    @include media(">=screen1024") {
+        margin-left: $gutter-xl;
+        margin-right: $gutter-xl;
+    }
+
+    @include media(">=screen1440") {
+        margin-left: $gutter-xxl;
+        margin-right: $gutter-xxl;
+    }
+}
+
+@mixin content-width() {
+    @include media(">=screen840") {
+        // cap line lengths
+        & > p,
+        & > ul,
+        & > ol {
+            max-width: $copy-width;
+        }
+    }
+}
+
+@mixin padding() {
+    padding-left: $gutter;
+    padding-right: $gutter;
+
+    @include media(">=screen768") {
+        padding-left: $gutter-lg;
+        padding-right: $gutter-lg;
+    }
+
+    @include media(">=screen1024") {
+        padding-left: $gutter-xl;
+        padding-right: $gutter-xl;
+    }
+
+    @include media(">=screen1440") {
+        padding-left: $gutter-xxl;
+        padding-right: $gutter-xxl;
+    }
+}
+
+/**
+* === ACCESSIBILITY ===
+*/
+
+@mixin visually-hidden($focus: null) {
+    position: absolute !important;
+    border: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    overflow: hidden;
+    word-wrap: normal !important; // Many screen reader and browser combinations announce broken words as they would appear visually.
+
+    $focus: null !default;
+    @if $focus == null {
+        // nothing, continue on
+    } @else {
+        &:focus {
+            top: 5px;
+            left: 5px;
+            display: block;
+            background-color: $yellow--light;
+            color: #444;
+            font-size: 1em;
+            text-decoration: none;
+            line-height: normal;
+            width: auto;
+            height: auto;
+            padding: $gutter-sm $gutter;
+            clip: auto !important;
+            clip-path: none;
+            z-index: 100000; // Above WP toolbar.
+        }
+    }
+}
+
+@mixin hide-visually($toggle: "hide") {
+    @if not index("hide" "unhide", $toggle) {
+        @error "`#{$toggle}` is not a valid value for the `$toggle` argument in " +
+            "the `hide-visually` mixin. Must be either `hide` or `unhide`.";
+    } @else if $toggle == "hide" {
+        border: 0;
+        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(100%);
+        height: 1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+    } @else if $toggle == "unhide" {
+        clip: auto;
+        clip-path: none;
+        height: auto;
+        overflow: visible;
+        position: static;
+        white-space: inherit;
+        width: auto;
+    }
+    // @example scss
+    //   .element {
+    //     @include hide-visually;
+    //
+    //     &:active,
+    //     &:focus {
+    //       @include hide-visually("unhide");
+    //     }
+    //   }
+}
+
+/**
+* === TOOLS ===
+*/
+
+@mixin aspect-ratio($width, $height) {
+    position: relative;
+
+    &::before {
+        content: "";
+        display: block;
+        width: 100%;
+        padding-top: ($height / $width) * 100%;
+    }
+
+    & > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+@mixin text-shadow() {
+    text-shadow: 2px 2px 4px fade-out($black, 0.95);
+}
+
+@mixin box-shadow($inset: null) {
+    @if $inset == "inset" {
+        box-shadow: inset 1px 2px 10px fade-out($black, 0.95);
+    } @else {
+        box-shadow: 1px 2px 10px fade-out($black, 0.95);
+    }
+}
+
+/**
+* === TYPE STYLES ===
+*/
+
+@mixin type() {
+    font-family: inherit;
+    font-weight: normal;
+    line-height: $base-line-height;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+    widows: 3;
+    orphans: 3;
+    color: inherit;
+
+    @include last(1) {
+        margin-bottom: 0;
+    }
+}
+
+@mixin title($underline: null) {
+    font-size: $font-h1;
+    letter-spacing: -1.5px;
+
+    @include media("<screen480") {
+        font-size: $font-h2;
+        hyphens: auto;
+        word-break: break-word;
+    }
+
+    @if $underline == "underlined" {
+        @include underlined();
+    }
+}
+
+@mixin subtitle($underline: null) {
+    font-size: $font-h2;
+    letter-spacing: -0.5px;
+
+    @include media("<screen480") {
+        hyphens: auto;
+    }
+
+    @if $underline == "underlined" {
+        @include underlined();
+    }
+}
+
+@mixin paragraph($underline: null) {
+    font-size: $font-h3;
+    @include media("<=screen320") {
+        font-size: 1rem;
+    }
+    @if $underline == "underlined" {
+        @include underlined();
+    }
+}
+
+@mixin body-copy($underline: null) {
+    @include type();
+    margin: 0 0 math.div($base-line-height, 2);
+
+    @if $underline == "underlined" {
+        @include underlined();
+    }
+}
+
+@mixin base-font-size() {
+    // font-size: 1.181vw;
+    font-size: clamp(100%, 1rem + 1vw, 1.33em);
+    font-size: 1rem;
+}
+
+@mixin small-font-size() {
+    font-size: clamp(75%, 1rem + 1vw, 1em);
+    font-size: 0.875rem;
+}
+
+@mixin smaller-font-size() {
+    font-size: clamp(75%, 1rem + 1vw, 1em);
+    font-size: 0.875rem;
+}
+
+@mixin smallest-font-size() {
+    font-size: clamp(62.5%, 1rem + 1vw, 0.75em);
+    font-size: 0.75rem;
+}
+
+@mixin label() {
+    font-family: $font-header;
+    font-size: $font-h5;
+    font-weight: 700;
+    line-height: 1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+@mixin caption() {
+    margin: 0;
+    // font-size: 1.15vw;
+    font-size: 0.875em;
+    font-family: $font-header;
+    font-weight: 700;
+    line-height: 1em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+@mixin underlined() {
+    position: relative;
+    padding-bottom: calc(.5em + 10px);
+    margin-bottom: .5em;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 50px;
+        height: 10px;
+        transition: background-color $speed, width $speed;
+        background-color: $yellow;
+
+        @include media(">=screen600") {
+            width: 100px;
+        }
+    }
+}
+
+@mixin drop-cap() {
+    &:first-letter {
+        margin: 0 0.25em 0 0;
+        float: left;
+        font-family: $font-secondary;
+        font-size: 3.25em;
+        // font-size: 3.375em;
+        // font-size: 2em;
+        font-size: 5.5em;
+        line-height: 0.9em;
+        color: $yellow;
+    }
+}
+
+/**
+* === BUTTONS AND LINKS ===
+*/
+
+@keyframes move {
+    0% {
+        background-position: 2px 100%;
+    }
+    100% {
+        background-position: 500px 100%;
+    }
+}
+
+@mixin inline-block() {
+    transition: color $speed linear;
+    font-weight: 400;
+    text-decoration: none;
+    border: 0 !important;
+    background: url("../../assets/img/wave.svg");
+    background-repeat: repeat-x;
+    background-size: 15px 5px;
+    background-position: 2px 100%;
+    color: inherit;
+    box-shadow: none !important;
+    animation: move 15s linear infinite;
+    animation-play-state: paused;
+    @include hocus {
+        color: $blue;
+        animation-play-state: running;
+    }
+}
+
+@mixin block-link($border: null) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: none;
+
+    @if $border == "has-border" {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        border: 10px transparent solid;
+        transition: border $speed;
+        &:hover,
+        &:focus {
+            border-color: fade-out($yellow, 0.15);
+        }
+    } @else {
+        // nothing, continue on
+    }
+}
+
+@mixin underline-link() {
+    border-bottom: 3px $black solid;
+    font-weight: 700;
+    padding-left: $small-spacing;
+    padding-right: $small-spacing;
+    padding-bottom: .25em;
+}
+
+@mixin btn-color($color: $white, $hover: $yellow) {
+    // border: 3px $color solid;
+    color: $color;
+}
+
+@mixin btn-style {
+    @include btn-color();
+    padding: .5em 1em;
+    transition: all $speed;
+    font-family: $font-header;
+    font-size: 1em;
+    font-weight: 750;
+    font-variation-settings: "wdth" 90;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: $base-border-radius;
+    background-color: $blue;
+
+    @include media(">=screen960") {
+        padding: .75em 1.25em;
+    }
+
+    // hover, focus
+    @include hocus {
+        background-color: $green;
+        color: $white;
+    }
+
+    &:active {
+        background-color: $black;
+        color: $white;
+    }
+
+    // disabled buttons
+    &:disabled {
+        opacity: 1;
+        border-color: $gray;
+        background-color: transparent;
+        color: $gray;
+        cursor: not-allowed !important;
+        // hover, focus
+        @include hocus {
+            background-color: $white--dark;
+            color: $gray;
+            // &::after {
+            //     display: none;
+            // }
+        }
+    }
+}
+
+@mixin btn-contact() {
+    @include btn-color($white);
+    @include caption();
+
+    &:focus {
+        @include btn-color($white);
+    }
+
+    @include media(">=screen600") {
+        position: absolute;
+        top: 50%;
+        right: $base-spacing;
+        transform: rotate(-90deg) translateY(-50%) !important;
+        transform-origin: center top 0;
+        z-index: 2;
+    }
+
+    @include media(">=screen960") {
+        padding: 0.75em 1em;
+    }
+
+    @include media(">=screen1024") {
+        transform: rotate(-90deg) translateY(-100%) !important;
+    }
+
+    @include media(">=screen1170") {
+        &:hover {
+            @include btn-color($white);
+        }
+    }
+
+    @include media(">=screen1440") {
+        transform: rotate(-90deg) translateY(-200%) !important;
+    }
+}

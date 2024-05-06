@@ -1,0 +1,39 @@
+/* ==========================================================================
+    Footer
+========================================================================== */
+
+.site-footer {
+    position: relative;
+    padding: 0;
+    background-color: $yellow;
+    color: $black;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 20px;
+    }
+
+    &::before {
+        top: -20px;
+        background-color: $green;
+    }
+
+    &::after {
+        top: 0;
+        background-color: $orange;
+    }
+
+    .site-info {
+        padding-top: calc(2.5em + 20px);
+        padding-bottom: 2.5em;
+        line-height: $base-line-height;
+
+        a {
+            @include inline-block();
+        }
+    }
+}
