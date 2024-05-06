@@ -39,15 +39,17 @@
 			display: block;
 			margin-bottom: 0;
 			border-top: 3px solid $black;
+			border-radius: 0;
 			background-color: transparent;
 			color: $black;
 
 			@include hocus {
-				background-color: $white--dark;
+				background-color: $blue;
+				color: $white;
 			}
 
 			&:active {
-				background-color: $black;
+				background-color: $green;
 				color: $white;
 			}
 		}

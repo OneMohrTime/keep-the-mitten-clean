@@ -101,6 +101,11 @@
             a {
                 display: flex;
             }
+            &:hover {
+                & > a {
+                    color: $orange;
+                }
+            }
         }
     }
 

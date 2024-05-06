@@ -119,6 +119,14 @@
 
 		a {
 			@include inline-block();
+			text-decoration: none !important;
+		}
+
+		ul:not(.tabs) {
+			margin: 0 0 0.75em;
+			padding-left: 1em;
+			list-style-type: disc;
+			line-height: 1.7em;
 		}
 
 		ul.tabs li a {

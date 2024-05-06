@@ -75,12 +75,13 @@
 --------------------------------------------------------------*/
 /* This section includes styles specific to different pages of the website, such as about, blog, home, work, etc. */
 
-@import "pages/about";
-@import "pages/archives";
-@import "pages/errors";
-@import "pages/blog";
+// @import "pages/about";
+// @import "pages/archives";
+@import "pages/default";
+// @import "pages/errors";
+// @import "pages/blog";
 @import "pages/home";
-@import "pages/instagram";
-@import "pages/logos";
-@import "pages/top-10s";
-@import "pages/work";
+// @import "pages/instagram";
+// @import "pages/logos";
+// @import "pages/top-10s";
+// @import "pages/work";
